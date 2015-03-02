@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/thecodingmonkey/Todo-CRUD/issues"
   },
-  "homepage": "https://github.com/thecodingmonkey/Todo-CRUD"
+  "homepage": "https://github.com/thecodingmonkey/Todo-CRUD",
+  "dependencies": {
+    "express": "^4.12.1",
+    "mongoose": "^3.8.24"
+  }
 }
