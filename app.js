@@ -20,6 +20,12 @@ app.use( methodOverride( function(req, res){
     return method;
   }
 }));
+app.use(function(req, res, next) {
+  console.log("Request from: " + req.ip);
+
+  next();
+
+});
 app.use(express.static(__dirname + '/public'));
 app.get('/', todo_main);
 app.get('/edit/:item', todo_edit);
@@ -64,14 +70,12 @@ function todo_update (req, res) {
   console.log(id, req.body, req.params, newTitle, newDesc);
 
   TodoItem
-    .find({_id : parseInt(id)})
-    .update({
+    .update({_id : parseInt(id)}, {
       item: newTitle,
       description: newDesc,
     }, function(err) {
       if (err) throw err;
 
-//      res.send("KO");
       res.redirect("/");
     });
 }

@@ -6,16 +6,17 @@ head
   link(rel="stylesheet", href="styles/styles.css")
 body
   header
-    button(action='/add') Add Item Screen
+    form(action='/add')
+      button(action='/add') Add Item Screen
 
     form(action='/new_item' method='POST')
       fieldset
-        h4 Quick Add:
+        h4.quickadd Quick Add:
         span
           button.add +
-        input#item(autofocus type="text" name="item")
+        input#item(autofocus type="text" name="item" placeholder="What needs to be done?")
         br
-        textarea#description(name="description" cols=50 rows=8)
+        textarea#description(name="description" cols=50 rows=8 placeholder="Description")
   data
     each item in items
       span.inline
@@ -31,7 +32,7 @@ body
       span 
         a(href="/edit/" + item._id + "#" + item._id)!= item.item
         br
-        p.inline= item.description
+        p.description.inline= item.description
       br
   footer
     p #{unfinished} items unfinished, #{total} items total.
