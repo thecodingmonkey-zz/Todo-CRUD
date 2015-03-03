@@ -1,7 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var methodOverride = require('method-override');
 var autoIncrement = require('mongoose-auto-increment');
+
 var app = express();
 app.set('view engine', 'jade');
 
@@ -9,13 +11,21 @@ var connection = mongoose.connect('mongodb://devleague-user:puglife@ds049181.mon
 autoIncrement.initialize(connection);
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use( methodOverride( function(req, res){
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method;
+    delete req.body._method;
 
+    return method;
+  }
+}));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', todo_main);
 app.post('/additem/:item', todo_add);
-app.delete('delete/:item', todo_delete);
+app.delete('/delete/:item', todo_delete);
+
 
 var Schema = mongoose.Schema;
 
@@ -47,7 +57,21 @@ function todo_add (req, res) {
 }
 
 function todo_delete (req, res) {
+  var id = req.params.item;
 
+  console.log(id);
+  TodoItem
+    .find({_id : parseInt(id)})
+    .remove(function(err) {
+      if (err) throw err;
+
+      req.method = 'GET';
+      res.status(401).redirect('/');
+
+  });
+
+
+//  res.send('OK');
 }
 
 function todo_item (req, res) {

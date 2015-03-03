@@ -3,6 +3,7 @@ html(lang="en")
 head
   meta(charset="UTF-8")
   title To-Do List
+  link(rel="stylesheet", href="styles/styles.css")
 body
   header
     form(action='/new_item' method='POST')
@@ -18,7 +19,8 @@ body
 
         span
           //- a(href="delete/#{item._id}")
-          form(action="/delete/" + item._id method='DELETE')
+          form(action="/delete/" + item._id method='POST')
+            input(type='hidden' name='_method' value='DELETE')
             input(type='submit' value='X') 
 
             //- img(src="assets/red-x.png" width=16 height=16 data-id="#{item.item_id}")
