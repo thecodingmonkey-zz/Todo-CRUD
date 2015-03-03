@@ -10,24 +10,23 @@ body
       fieldset
         span
           button.add +
-        input(type="text" name="item")
+        input(autofocus type="text" name="item")
   data
     each item in items
-      p
-        span
-          input(type="checkbox" checked=item.finished value=item.item_id)
+      span.inline
+        input.checkbox.inline(type="checkbox" checked=item.finished value=item._id)
+      span.inline
+        //- a(href="delete/#{item._id}")
+        form.inline(action="/delete/" + item._id method='POST')
+          input(type='hidden' name='_method' value='DELETE')
+          input(type='submit' value='X') 
 
-        span
-          //- a(href="delete/#{item._id}")
-          form(action="/delete/" + item._id method='POST')
-            input(type='hidden' name='_method' value='DELETE')
-            input(type='submit' value='X') 
+          //- img(src="assets/red-x.png" width=16 height=16 data-id="#{item.item_id}")
 
-            //- img(src="assets/red-x.png" width=16 height=16 data-id="#{item.item_id}")
-
-        span #{item.item}  
+      span #{item.item}  
+      br
   footer
-    p 0 items unfinished, 5 items total.
+    p #{unfinished} items unfinished, #{total} items total.
 
   script(src="http://code.jquery.com/jquery-2.1.1.min.js")
   script(src="./js/app.js")

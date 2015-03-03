@@ -21,10 +21,11 @@ app.use( methodOverride( function(req, res){
   }
 }));
 app.use(express.static(__dirname + '/public'));
-
 app.get('/', todo_main);
-app.post('/additem/:item', todo_add);
+app.post('/new_item', todo_add);
 app.delete('/delete/:item', todo_delete);
+app.put('/check/:item', todo_check);
+app.put('/uncheck/:item', todo_uncheck);
 
 
 var Schema = mongoose.Schema;
@@ -36,24 +37,42 @@ var todoItemSchema = new Schema({
 });
 todoItemSchema.plugin(autoIncrement.plugin, 'Book');
 
-
 var TodoItem = mongoose.model('todoItem', todoItemSchema);
 
 function todo_add (req, res) {
-//  console.log(req.body, req.params);
-
   var todo = new TodoItem({
-    item_id: req.body.id,
     item: req.body.item,
-    finished: req.body.finished
+    finished: false
   });
 
   todo.save(function(err) {
     if (err) throw err;
-
-     res.send("OK");
+      res.redirect("/");
   });
+}
 
+function todo_check (req, res) {
+  var id = req.params.item;
+
+  TodoItem
+    .find({_id : parseInt(id)})
+    .update({finished: true}, function(err) {
+      if (err) throw err;
+
+      res.send("OK");
+    });
+}
+
+function todo_uncheck (req, res) {
+  var id = req.params.item;
+
+  TodoItem
+    .find({_id : parseInt(id)})
+    .update({finished: false}, function(err) {
+      if (err) throw err;
+
+      res.send("OK");
+    });
 }
 
 function todo_delete (req, res) {
@@ -69,9 +88,6 @@ function todo_delete (req, res) {
       res.status(401).redirect('/');
 
   });
-
-
-//  res.send('OK');
 }
 
 function todo_item (req, res) {
@@ -80,19 +96,32 @@ function todo_item (req, res) {
 
 function todo_main (req, res) {
   var items;
+  var checkedCount = 0, uncheckedCount = 0;
 
   TodoItem.find( function(err, items) {
     if (err) throw err;
 
     console.log(items);
 
-    res.render('main', {items: items});  
+    items.map(function(val) {
+      console.log(val);
+
+      if (val.finished) {
+        checkedCount++;
+      }
+      else {
+        uncheckedCount++;
+      }
+
+    });
+
+    res.render('main', {
+      items: items,
+      unfinished: uncheckedCount,
+      total: uncheckedCount + checkedCount
+    });  
   });
 
-}
-
-function helloworld (req, res) {
-  res.send('Hello World!');
 }
 
 var server = app.listen(3000, function () {
@@ -101,6 +130,5 @@ var server = app.listen(3000, function () {
   var port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port);
-
 });
 
