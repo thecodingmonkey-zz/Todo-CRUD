@@ -6,17 +6,25 @@ head
   link(rel="stylesheet", href="styles/styles.css")
 body
   header
-    form(action='/add')
-      button(action='/add') Add Item Screen
+  
+    h1 Stuff To Do
 
-    form(action='/new_item' method='POST')
-      fieldset
-        h4.quickadd Quick Add:
-        input#item(autofocus type="text" name="item" width="90%" placeholder="What needs to be done?")
-        br
-        textarea#description(name="description" cols=50 rows=8 placeholder="Description")
-        span
-          button.quickadd + Quick Add +
+    div.box
+
+      form(action='/new_item' method='POST')
+        fieldset
+          h4.quickadd Add Item:
+          input#item(autofocus type="text" name="item" width="90%" placeholder="What needs to be done?")
+          br
+          textarea#description(name="description" cols=50 rows=8 placeholder="Description")
+          span
+            button.quickadd + Quick Add +
+
+      hr
+
+      form(action='/add' method='GET')
+        button.addnewscreen(action='/add') Add Item (new screen)
+
   data
     each item in items
       span.inline

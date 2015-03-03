@@ -29,25 +29,38 @@ a {
 }
 
 h4 {
-  margin-bottom: 0;
-  margin-top: 10px;
+  margin: 0;
 }
 
 p {
 
 }
 
+h1 {
+  font-family: 'Shadows Into Light', cursive;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+} 
+
 .quickadd, .description, footer {
   font-family: 'Shadows Into Light', cursive;
   letter-spacing: 1px;
 }
 
-button.quickadd {
+.addnewscreen {
+  margin-left: 10px;
+}
+
+button {
+  margin-top: 10px;
   font-size: 24px;
+  font-family: 'Shadows Into Light', cursive;
 }
 
 input[type=checkbox] {
   margin-right: 20px;
+  font-size: 24px;
 }
 
 p.description {
@@ -56,6 +69,13 @@ p.description {
 
 #item {
   width: 100%;
+  font-size: 32px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#description {
+  font-size: 24px;
+  font-family: 'Shadows Into Light', cursive;
 }
 
 textarea {
@@ -83,3 +103,22 @@ input[type=checkbox]:checked:before {
   float: right;
   left: 0%;
 }
+
+fieldset {
+  border: 0px;
+}
+
+div.box {
+  border: 2px black solid;
+  padding: 10px;
+}
+
+div.box form {
+  margin: 0;
+}
+
+body {
+  padding-left: 15%;
+  padding-right: 15%;
+/*  width: 100%;
+*/}
