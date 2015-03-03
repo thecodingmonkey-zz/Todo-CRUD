@@ -1,0 +1,38 @@
+
+pages
+list
+new_item
+edit
+
+layouts
+folderpaper-header
+folderpaper-footer
+
+
+use cases:
+add a todo
+delete a todo
+check off a todo
+uncheck
+show finished todo items
+
+
+
+object format in database:
+{
+  id: Number
+  item: String
+  finished: boolean
+}
+
+
+screen mockup
+[+] [new todo item]
+-------------------
+[todo] [done]
+-------------------
+[ ] item        [X]
+[ ] item
+
+-------------------
+copyright 2015 blah
