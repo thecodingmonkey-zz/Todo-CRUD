@@ -6,8 +6,11 @@ head
   link(rel="stylesheet", href="styles/styles.css")
 body
   header
+    button(action='/add') Add Item Screen
+
     form(action='/new_item' method='POST')
       fieldset
+        h4 Quick Add:
         span
           button.add +
         input#item(autofocus type="text" name="item")

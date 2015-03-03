@@ -23,6 +23,7 @@ app.use( methodOverride( function(req, res){
 app.use(express.static(__dirname + '/public'));
 app.get('/', todo_main);
 app.get('/edit/:item', todo_edit);
+app.get('/add', todo_newpage_add);
 app.post('/new_item', todo_add);
 app.delete('/delete/:item', todo_delete);
 app.put('/check/:item', todo_check);
@@ -99,6 +100,10 @@ function todo_uncheck (req, res) {
     });
 }
 
+function todo_newpage_add (req, res) {
+  res.render('add');
+}
+
 function todo_delete (req, res) {
   var id = req.params.item;
 
@@ -143,7 +148,6 @@ function todo_main (req, res) {
       total: uncheckedCount + checkedCount
     });  
   });
-
 }
 
 function todo_edit (req, res) {

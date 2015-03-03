@@ -1,0 +1,17 @@
+doctype
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  title To-Do List
+  link(rel="stylesheet", href="styles/styles.css")
+body
+  form(action='/new_item' method='POST')
+    fieldset
+      label(for="item") Task Name: 
+      input#item(autofocus type="text" name="item")
+      br
+      label(for="description") Description:
+      textarea#description(name="description" cols=50 rows=8)
+      br
+      button.add Add
+      button(action="/") Nevermind.
