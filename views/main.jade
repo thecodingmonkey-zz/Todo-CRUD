@@ -12,22 +12,24 @@ body
     form(action='/new_item' method='POST')
       fieldset
         h4.quickadd Quick Add:
-        span
-          button.add +
-        input#item(autofocus type="text" name="item" placeholder="What needs to be done?")
+        input#item(autofocus type="text" name="item" width="90%" placeholder="What needs to be done?")
         br
         textarea#description(name="description" cols=50 rows=8 placeholder="Description")
+        span
+          button.quickadd + Quick Add +
   data
     each item in items
-      span.inline
-        input.checkbox.inline(type="checkbox" checked=item.finished value=item._id)
       span.inline
         //- a(href="delete/#{item._id}")
         form.inline(action="/delete/" + item._id method='POST')
           input(type='hidden' name='_method' value='DELETE')
-          input(type='submit' value='X') 
+          //- input(type='submit' value='X') 
+          input.delete(type='image' src='./assets/red-x.png' height=16 width=16 alt="Delete this item")
 
           //- img(src="assets/red-x.png" width=16 height=16 data-id="#{item.item_id}")
+
+      span.inline
+        input.checkbox.inline(type="checkbox" checked=item.finished value=item._id)
 
       span 
         a(href="/edit/" + item._id + "#" + item._id)!= item.item

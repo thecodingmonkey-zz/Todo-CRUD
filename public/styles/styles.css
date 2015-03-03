@@ -7,6 +7,8 @@ body {
   /*background-color: red;*/
   font-size: 24px;
 
+  background-color: "#eee";
+
   background-image: url('../assets/hedgehog-bg.png');
   background-size: contain;
 
@@ -35,6 +37,49 @@ p {
 
 }
 
-.quickadd, .description {
+.quickadd, .description, footer {
   font-family: 'Shadows Into Light', cursive;
+  letter-spacing: 1px;
+}
+
+button.quickadd {
+  font-size: 24px;
+}
+
+input[type=checkbox] {
+  margin-right: 20px;
+}
+
+p.description {
+  margin-left: 20px;
+}
+
+#item {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+}
+
+input[type=checkbox]:before { 
+  content:""; 
+  display:inline-block; 
+  width:32px; 
+  height:32px; 
+  position: relative;
+  top: -15px;
+  /*background:red; */
+  background-image: url("../assets/unchecked.png");
+  background-size: cover;
+}
+
+input[type=checkbox]:checked:before { 
+  /*background:green; */
+  background-image: url("../assets/checked.png");
+}​
+
+.delete {
+  float: right;
+  left: 0%;
 }
