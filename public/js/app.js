@@ -1,6 +1,8 @@
 $(document).ready( function() {
+  $("#description").hide();
+
+
   $("input.checkbox").click( function() {
-//    alert('hi');
     var $this = $(this);
     var num = $this[0].value;
 
@@ -19,4 +21,15 @@ $(document).ready( function() {
         });
     }
   });
+
+  $("#item").on("keyup", function() {
+    console.log('hai');
+    if ($("#item")[0].value.length > 0) {
+      $("#description").show();
+    }
+    else {
+      $("#description").hide();
+    }
+  });
+
 });

@@ -10,7 +10,9 @@ body
       fieldset
         span
           button.add +
-        input(autofocus type="text" name="item")
+        input#item(autofocus type="text" name="item")
+        br
+        textarea#description(name="description" cols=50 rows=8)
   data
     each item in items
       span.inline
@@ -23,7 +25,10 @@ body
 
           //- img(src="assets/red-x.png" width=16 height=16 data-id="#{item.item_id}")
 
-      span #{item.item}  
+      span 
+        a(href="/edit/" + item._id + "#" + item._id)!= item.item
+        br
+        p.inline= item.description
       br
   footer
     p #{unfinished} items unfinished, #{total} items total.

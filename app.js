@@ -22,10 +22,12 @@ app.use( methodOverride( function(req, res){
 }));
 app.use(express.static(__dirname + '/public'));
 app.get('/', todo_main);
+app.get('/edit/:item', todo_edit);
 app.post('/new_item', todo_add);
 app.delete('/delete/:item', todo_delete);
 app.put('/check/:item', todo_check);
 app.put('/uncheck/:item', todo_uncheck);
+app.put('/update/:item', todo_update);
 
 
 var Schema = mongoose.Schema;
@@ -33,15 +35,17 @@ var Schema = mongoose.Schema;
 var todoItemSchema = new Schema({
   item_id: String,
   item: String,
+  description: String,
   finished: Boolean,
 });
-todoItemSchema.plugin(autoIncrement.plugin, 'Book');
 
 var TodoItem = mongoose.model('todoItem', todoItemSchema);
+todoItemSchema.plugin(autoIncrement.plugin, 'todoItem');
 
 function todo_add (req, res) {
   var todo = new TodoItem({
     item: req.body.item,
+    description: req.body.description,
     finished: false
   });
 
@@ -49,6 +53,26 @@ function todo_add (req, res) {
     if (err) throw err;
       res.redirect("/");
   });
+}
+
+function todo_update (req, res) {
+  var id = req.params.item;
+  var newTitle = req.body.item;
+  var newDesc = req.body.description;
+
+  console.log(id, req.body, req.params, newTitle, newDesc);
+
+  TodoItem
+    .find({_id : parseInt(id)})
+    .update({
+      item: newTitle,
+      description: newDesc,
+    }, function(err) {
+      if (err) throw err;
+
+//      res.send("KO");
+      res.redirect("/");
+    });
 }
 
 function todo_check (req, res) {
@@ -101,10 +125,8 @@ function todo_main (req, res) {
   TodoItem.find( function(err, items) {
     if (err) throw err;
 
-    console.log(items);
-
     items.map(function(val) {
-      console.log(val);
+      // console.log(val);
 
       if (val.finished) {
         checkedCount++;
@@ -119,6 +141,37 @@ function todo_main (req, res) {
       items: items,
       unfinished: uncheckedCount,
       total: uncheckedCount + checkedCount
+    });  
+  });
+
+}
+
+function todo_edit (req, res) {
+  var items;
+  var checkedCount = 0, uncheckedCount = 0;
+
+  TodoItem.find( function(err, items) {
+    if (err) throw err;
+
+    items.map(function(val) {
+      // console.log(val);
+
+      if (val.finished) {
+        checkedCount++;
+      }
+      else {
+        uncheckedCount++;
+      }
+
+    });
+
+    console.log(items);
+
+    res.render('edit', {
+      items: items,
+      unfinished: uncheckedCount,
+      total: uncheckedCount + checkedCount,
+      current: req.params.item,
     });  
   });
 
