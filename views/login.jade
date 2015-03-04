@@ -5,39 +5,52 @@ head
   title Log In to To-Do
   link(rel="stylesheet", href="/styles/styles.css")
 body
+  header
+    h1 Stuff To Do
+
   div.tabs
     div.tab
       input#tab-1(type="radio" name="tab-group-1" checked)
-      label(for="tab-1") Login
+      label.tabtext(for="tab-1") Login
 
       div.tab-content
         //- p test1
         form(action="/login" method="POST")
           fieldset
-            h2 Login
+            //- h2 Login
             h4.login_error= error
             input(type="hidden" name="action" value="login")
-            label Username:
-            input(type="text" name="username")
-            br
-            label Password:
-            input(type="password" name="password")
-            button login
+            div.labels.inline-block
+              label Username:
+              br
+              label Password:
+              br
+              button login
+            
+            div.formboxes.inline-block.valign-top
+              input(type="text" name="username")
+              br
+              input(type="password" name="password")
     div.tab
       input#tab-2(type="radio" name="tab-group-1")
-      label(for="tab-2") Create Account
+      label.tabtext(for="tab-2") Create Account
 
       div.tab-content
         //- p test2
         form(action="/login" method="POST")
           fieldset
-            h2 Create Account
-            input(type="hidden" name="action" value="create")
-            label Username:
-            input(type="text" name="username")
-            br
-            label Password:
-            input(type="password" name="password")
-            button create
+            div.labels.inline-block
+              label Username:
+              br
+              label Password:
+              br
+              button create
+
+            //- h2 Create Account
+            div.formboxes.inline-block.valign-top
+              input(type="hidden" name="action" value="create")
+              input(type="text" name="username")
+              br
+              input(type="password" name="password")
 
   

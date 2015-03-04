@@ -34,33 +34,37 @@ body {
   font-family: 'Indie Flower', cursive;
 }
 
-h4 {
-  margin: 0;
-}
+
 
 item {
   padding-bottom: 20px;
   display: block;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Shadows Into Light', cursive;
+}
+
+h1 {
   letter-spacing: 1px;
   margin: 0;
   padding: 0;
 } 
 
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
 h3 {
-  font-family: 'Shadows Into Light', cursive;
   padding: 0;
   margin: 0;
   font-size: 18px;
   letter-spacing: 2px;
 }
 
-h3 a {
-  /*color: inherit;*/
-  
+h4 {
+  margin: 0;
 }
 
 .quickadd, .description, footer {
@@ -183,7 +187,6 @@ item div {
 
 label {
    font-family: 'Shadows Into Light', cursive;
-   
  }
 
 .fakebutton {
@@ -207,16 +210,17 @@ appearance:button;
 
 .tabs {
   position: relative;   
-  min-height: 400px; /* This part sucks */
+  min-height: 250px; /* This part sucks */
   clear: both;
   margin: 25px 0;
 }
 .tab {
   float: left;
 }
-.tab label {
+.tab label.tabtext {
   background: #eee; 
-  padding: 10px; 
+  padding: 10px;
+  padding-bottom: 20px; 
   border: 1px solid #ccc; 
   margin-left: -1px; 
   position: relative;
@@ -234,6 +238,7 @@ appearance:button;
   bottom: 0;
   padding: 20px;
   border: 1px solid #ccc; 
+  /*opacity: 0.5;*/
 }
 [type=radio]:checked ~ label {
   background: white;
@@ -242,4 +247,13 @@ appearance:button;
 }
 [type=radio]:checked ~ label ~ .tab-content {
   z-index: 1;
+}
+
+.tab-content input {
+  font-size: 18px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+.tab-content label {
+  width: 100px;
 }

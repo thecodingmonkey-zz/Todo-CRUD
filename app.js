@@ -29,7 +29,6 @@ app.use( methodOverride( function(req, res){
 }));
 app.use(function(req, res, next) {
   console.log("Request from: " + req.ip);
-  console.log('session: ', req.session);
 
   next();
 
@@ -39,7 +38,8 @@ app.get('/login', todo_login);
 app.post('/login', todo_checklogin);
 app.use(function(req, res, next) {
   console.log('Associated user: ', req.session.user);
-//  if (req.session.user)
+  req.session.lastLoginError = undefined;
+
   if (req.session.user === undefined) {
     res.redirect('/login');
   }
@@ -123,6 +123,8 @@ function todo_add (req, res) {
 }
 
 function todo_login (req, res) {
+  req.session.user = undefined;
+
   res.render('login', {
     error: req.session.lastLoginError ? req.session.lastLoginError : ""
   });
@@ -167,7 +169,12 @@ function todo_checklogin (req, res) {
     });
 
     newUser.save(function(err) {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        req.session.lastLoginError = err.err;
+        res.redirect("/login");
+        return;
+      }
 
       req.session.user = req.body.username;
       
@@ -186,7 +193,7 @@ function todo_update (req, res) {
   console.log(id, req.body, req.params, newTitle, newDesc);
 
   TodoItem
-    .update({_id : parseInt(id)}, {
+    .update({_id : parseInt(id), user: req.session.user}, {
       item: newTitle,
       description: newDesc,
     }, function(err) {
