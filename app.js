@@ -39,7 +39,7 @@ app.post('/login', todo_checklogin);
 app.use(function(req, res, next) {
   console.log('Associated user: ', req.session.user);
 //  if (req.session.user)
-  if (req.session.username === undefined) {
+  if (req.session.user === undefined) {
     res.redirect('/login');
   }
   else {
@@ -64,6 +64,7 @@ var todoItemSchema = new Schema({
   item: String,
   description: String,
   finished: Boolean,
+  user: String
 });
 
 var TodoItem = mongoose.model('todoItem', todoItemSchema);
@@ -73,7 +74,8 @@ function todo_add (req, res) {
   var todo = new TodoItem({
     item: req.body.item,
     description: req.body.description,
-    finished: false
+    finished: false,
+    user: req.session.user
   });
 
   todo.save(function(err) {
@@ -92,9 +94,8 @@ function todo_checklogin (req, res) {
 
   }
   else if (req.body.action === 'create') {
-    req.session.username = req.body.username;
-//    res.session.username = req.body.username;
-    console.log(req.session.username);
+    req.session.user = req.body.username;
+    console.log(req.session.user);
     res.redirect('/');
   }
 
@@ -122,7 +123,7 @@ function todo_check (req, res) {
   var id = req.params.item;
 
   TodoItem
-    .find({_id : parseInt(id)})
+    .find({_id : parseInt(id), user: req.session.user})
     .update({finished: true}, function(err) {
       if (err) throw err;
 
@@ -134,7 +135,7 @@ function todo_uncheck (req, res) {
   var id = req.params.item;
 
   TodoItem
-    .find({_id : parseInt(id)})
+    .find({_id : parseInt(id), user: req.session.user})
     .update({finished: false}, function(err) {
       if (err) throw err;
 
@@ -143,7 +144,7 @@ function todo_uncheck (req, res) {
 }
 
 function todo_newpage_add (req, res) {
-  res.render('add');
+  res.render('add', {user: req.session.user } );
 }
 
 function todo_delete (req, res) {
@@ -151,7 +152,7 @@ function todo_delete (req, res) {
 
   console.log(id);
   TodoItem
-    .find({_id : parseInt(id)})
+    .find({_id : parseInt(id), user: req.session.user})
     .remove(function(err) {
       if (err) throw err;
 
@@ -169,7 +170,7 @@ function todo_main (req, res) {
   var items;
   var checkedCount = 0, uncheckedCount = 0;
 
-  TodoItem.find( function(err, items) {
+  TodoItem.find({user: req.session.user},  function(err, items) {
     if (err) throw err;
 
     items.map(function(val) {
@@ -187,7 +188,8 @@ function todo_main (req, res) {
     res.render('main', {
       items: items,
       unfinished: uncheckedCount,
-      total: uncheckedCount + checkedCount
+      total: uncheckedCount + checkedCount,
+      user: req.session.user
     });  
   });
 }
@@ -196,7 +198,7 @@ function todo_edit (req, res) {
   var items;
   var checkedCount = 0, uncheckedCount = 0;
 
-  TodoItem.find( function(err, items) {
+  TodoItem.find( {user: req.session.user } , function(err, items) {
     if (err) throw err;
 
     items.map(function(val) {
@@ -218,6 +220,7 @@ function todo_edit (req, res) {
       unfinished: uncheckedCount,
       total: uncheckedCount + checkedCount,
       current: req.params.item,
+      user: req.session.user
     });  
   });
 

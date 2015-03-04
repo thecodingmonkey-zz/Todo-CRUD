@@ -50,6 +50,19 @@ h1 {
   padding: 0;
 } 
 
+h3 {
+  font-family: 'Shadows Into Light', cursive;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+h3 a {
+  /*color: inherit;*/
+  
+}
+
 .quickadd, .description, footer {
   font-family: 'Shadows Into Light', cursive;
   letter-spacing: 1px;
@@ -70,9 +83,6 @@ input[type=checkbox] {
   margin-right: 20px;
   font-size: 24px;
 }
-input[type='checkbox']:checked:before { 
-  background-image: url("../assets/checked.png");
-}
 
 a {
 
@@ -82,13 +92,7 @@ p.description {
   display: block;
   margin-top: 0;
   margin-bottom: 0
-
-/*  margin-bottom: -40px;
-  position: relative;
-  left: 70px;
-  top: -40px;
-
-*/}
+}
 
 #item {
   width: 100%;
@@ -119,7 +123,9 @@ input[type=checkbox]:before {
   background-size: cover;
 }
 
-
+input[type='checkbox']:checked:before { 
+  background-image: url("../assets/checked.png");
+}
 
 
 div.deletediv {
