@@ -14,7 +14,7 @@ body
       form(action='/new_item' method='POST')
         fieldset
           h4.quickadd Add Item:
-          input#item(autofocus type="text" name="item" width="90%" placeholder="What needs to be done?")
+          input#item(autofocus autocomplete="off" type="text" name="item" width="90%" placeholder="What needs to be done?")
           br
           textarea#description(name="description" cols=50 rows=8 placeholder="Description")
           span
@@ -28,19 +28,17 @@ body
   data
     each item in items
       item
-        span.inline
+        div.inline-block.deletediv
           form.inline(action="/delete/" + item._id method='POST')
             input(type='hidden' name='_method' value='DELETE')
             input.delete(type='image' src='./assets/red-x.png' height=16 width=16 alt="Delete this item")
 
-        span.inline
+        div.inline-block.checkboxes.valign-top
           input.checkbox.inline(type="checkbox" checked=item.finished value=item._id)
 
-        span 
+        div.inline-block.tododata
           a.itemtext(href="/edit/" + item._id + "#current")= item.item
-          br
           p.description.inline= item.description
-        br
   footer
     p #{unfinished} items unfinished, #{total} items total.
 

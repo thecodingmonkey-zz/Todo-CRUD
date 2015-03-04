@@ -21,6 +21,14 @@ body {
   display: inline;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
+.valign-top {
+  vertical-align: top;
+}
+
 .itemtext {
   text-decoration: none;
   color: inherit;
@@ -64,10 +72,25 @@ input[type=checkbox] {
   margin-right: 20px;
   font-size: 24px;
 }
+input[type='checkbox']:checked:before { 
+  background-image: url("../assets/checked.png");
+}
+
+a {
+
+}
 
 p.description {
-  margin-left: 20px;
-}
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0
+
+/*  margin-bottom: -40px;
+  position: relative;
+  left: 70px;
+  top: -40px;
+
+*/}
 
 #item {
   width: 100%;
@@ -93,19 +116,16 @@ input[type=checkbox]:before {
   height:32px; 
   position: relative;
   top: -15px;
-  /*background:red; */
+
   background-image: url("../assets/unchecked.png");
   background-size: cover;
 }
 
-input[type=checkbox]:checked:before { 
-  /*background:green; */
-  background-image: url("../assets/checked.png");
-}​
 
-.delete {
+
+
+div.deletediv {
   float: right;
-  left: 0%;
 }
 
 fieldset {
@@ -123,6 +143,16 @@ div.box form {
   margin: 0;
 }
 
+div.tododata {
+  width: 80%;
+}
+
+div.checkboxes {
+  width: 40px;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
 body {
   padding-left: 15%;
   padding-right: 15%;
@@ -132,9 +162,23 @@ body {
   line-height: 1.6;
 }
 
+item {
+  padding-left: 20px;
+  /*text-indent: -30px;*/
+  padding-right: 20px;
+  border-bottom: 1px gray solid;
+  padding-top: 10px;
+}
+
+item div {
+  /*width: 60%;*/
+}
+
+
 /*  styles for add page */
 
 label {
    font-family: 'Shadows Into Light', cursive;
    
  }
+
