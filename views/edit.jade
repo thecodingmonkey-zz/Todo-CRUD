@@ -3,32 +3,34 @@ html(lang="en")
 head
   meta(charset="UTF-8")
   title To-Do List
-  link(rel="stylesheet", href="styles/styles.css")
+  link(rel="stylesheet", href="/styles/styles.css")
 body
+  h1 EDIT
   header
   data
     each item in items
-      span.fixedfont.inline
-        if item.finished == true
-          span [X]
-        else
-          span [ ]
-      a(name='#' + item._id)
-      span.inline
-        if item._id == current
-          form(action='/update/' + item._id method="POST")
-            fieldset
-              input(type='hidden' name='_method' value='PUT')
-              input.inline(type="text" name="item" value=item.item) 
-              br
-              textarea(name="description" rows=8 cols=50)= item.description
-              input(type='submit' value='Edit') 
-        else
-          span.inline= item.item 
-          br
-          span.inline= item.description
-
-      br
+      item
+        span.fixedfont.inline
+          if item.finished == true
+            img(src="/assets/checked.png" width=32 height=32)
+          else
+            img(src="/assets/unchecked.png" width=32 height=32)
+        span.inline
+          if item._id == current
+            div.box#current
+              form(action='/update/' + item._id method="POST")
+                fieldset
+                  input(type='hidden' name='_method' value='PUT')
+                  input.inline#item(type="text" name="item" value=item.item) 
+                  br
+                  textarea#description(name="description" rows=8 cols=50)= item.description
+                  button Update
+                  button(action="/") Nevermind.
+          else
+            span.itemtext.inline= item.item 
+            br
+            span.description.inline= item.description
+        br
   footer
     p #{unfinished} items unfinished, #{total} items total.
 

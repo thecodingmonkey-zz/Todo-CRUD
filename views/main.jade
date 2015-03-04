@@ -29,19 +29,15 @@ body
     each item in items
       item
         span.inline
-          //- a(href="delete/#{item._id}")
           form.inline(action="/delete/" + item._id method='POST')
             input(type='hidden' name='_method' value='DELETE')
-            //- input(type='submit' value='X') 
             input.delete(type='image' src='./assets/red-x.png' height=16 width=16 alt="Delete this item")
-
-            //- img(src="assets/red-x.png" width=16 height=16 data-id="#{item.item_id}")
 
         span.inline
           input.checkbox.inline(type="checkbox" checked=item.finished value=item._id)
 
         span 
-          a(href="/edit/" + item._id + "#" + item._id)= item.item
+          a.itemtext(href="/edit/" + item._id + "#current")= item.item
           br
           p.description.inline= item.description
         br
