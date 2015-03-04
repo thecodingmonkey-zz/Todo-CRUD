@@ -3,29 +3,41 @@ html(lang="en")
 head
   meta(charset="UTF-8")
   title Log In to To-Do
+  link(rel="stylesheet", href="/styles/styles.css")
 body
-  div.content
-    form(action="/login" method="POST")
-      fieldset
-        h3 Login
-        input(type="hidden" name="action" value="login")
-        label Username:
-        input(type="text" name="username")
-        br
-        label Password:
-        input(type="password" name="password")
-        button login
+  div.tabs
+    div.tab
+      input#tab-1(type="radio" name="tab-group-1" checked)
+      label(for="tab-1") Login
 
-  div.content
-    form(action="/login" method="POST")
-      fieldset
-        h3 Create Account
-        input(type="hidden" name="action" value="create")
-        label Username:
-        input(type="text" name="username")
-        br
-        label Password:
-        input(type="password" name="password")
-        button login
+      div.tab-content
+        //- p test1
+        form(action="/login" method="POST")
+          fieldset
+            h2 Login
+            h4.login_error= error
+            input(type="hidden" name="action" value="login")
+            label Username:
+            input(type="text" name="username")
+            br
+            label Password:
+            input(type="password" name="password")
+            button login
+    div.tab
+      input#tab-2(type="radio" name="tab-group-1")
+      label(for="tab-2") Create Account
+
+      div.tab-content
+        //- p test2
+        form(action="/login" method="POST")
+          fieldset
+            h2 Create Account
+            input(type="hidden" name="action" value="create")
+            label Username:
+            input(type="text" name="username")
+            br
+            label Password:
+            input(type="password" name="password")
+            button create
 
   

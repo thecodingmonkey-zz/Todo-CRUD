@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var methodOverride = require('method-override');
 var autoIncrement = require('mongoose-auto-increment');
+var bcrypt = require('bcrypt');
 
 var app = express();
 app.set('view engine', 'jade');
@@ -70,6 +71,43 @@ var todoItemSchema = new Schema({
 var TodoItem = mongoose.model('todoItem', todoItemSchema);
 todoItemSchema.plugin(autoIncrement.plugin, 'todoItem');
 
+var SALT_WORK_FACTOR = 10;
+
+var UserSchema = new Schema({
+    username: { type: String, required: true, index: { unique: true } },
+    password: { type: String, required: true }
+});
+
+UserSchema.pre('save', function(next) {
+    var user = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
+
+        // hash the password using our new salt
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
+
+            // override the cleartext password with the hashed one
+            user.password = hash;
+            next();
+        });
+    });
+});
+
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) return cb(err);
+        cb(null, isMatch);
+    });
+};
+
+var User = mongoose.model('User', UserSchema);
+
 function todo_add (req, res) {
   var todo = new TodoItem({
     item: req.body.item,
@@ -85,22 +123,61 @@ function todo_add (req, res) {
 }
 
 function todo_login (req, res) {
-  res.render('login');
+  res.render('login', {
+    error: req.session.lastLoginError ? req.session.lastLoginError : ""
+  });
 }
 function todo_checklogin (req, res) {
   console.log(req.body);
 
   if (req.body.action === 'login') {
+    // fetch user and test password verification
+    User.findOne({ username: req.body.username }, function(err, user) {
+        if (err) throw err;
+
+        if (user === null) {
+          req.session.lastLoginError = "No such user.";
+          res.redirect("/login");
+          return;
+        }
+
+        // test a matching password
+        user.comparePassword(req.body.password, function(err, isMatch) {
+            if (err) throw err;
+            console.log('Login password match:', isMatch); // -&gt; Password123: true
+
+        if (isMatch) {
+          req.session.user = req.body.username;
+          res.redirect("/");
+        }
+        else {
+          req.session.lastLoginError = "Invalid user/password combination.";
+          res.redirect("/login");
+        }
+
+
+        });
+    });
 
   }
   else if (req.body.action === 'create') {
-    req.session.user = req.body.username;
-    console.log(req.session.user);
-    res.redirect('/');
-  }
+    var newUser = new User({
+      username: req.body.username,
+      password: req.body.password
+    });
 
-//  res.send("OK");
+    newUser.save(function(err) {
+      if (err) throw err;
+
+      req.session.user = req.body.username;
+      
+      console.log(req.session.user);
+      res.redirect('/');
+      
+    });
+  }
 }
+
 function todo_update (req, res) {
   var id = req.params.item;
   var newTitle = req.body.item;
@@ -174,8 +251,6 @@ function todo_main (req, res) {
     if (err) throw err;
 
     items.map(function(val) {
-      // console.log(val);
-
       if (val.finished) {
         checkedCount++;
       }
