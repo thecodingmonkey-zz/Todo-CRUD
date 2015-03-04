@@ -32,8 +32,9 @@ h4 {
   margin: 0;
 }
 
-p {
-
+item {
+  padding-bottom: 20px;
+  display: block;
 }
 
 h1 {
@@ -56,6 +57,7 @@ button {
   margin-top: 10px;
   font-size: 24px;
   font-family: 'Shadows Into Light', cursive;
+  opacity: 1.0;
 }
 
 input[type=checkbox] {
@@ -71,11 +73,13 @@ p.description {
   width: 100%;
   font-size: 32px;
   font-family: 'Shadows Into Light', cursive;
+  letter-spacing: 1px;
 }
 
 #description {
   font-size: 24px;
   font-family: 'Shadows Into Light', cursive;
+  letter-spacing: 2px;
 }
 
 textarea {
@@ -111,6 +115,8 @@ fieldset {
 div.box {
   border: 2px black solid;
   padding: 10px;
+  background-color: #ddd;
+  opacity: 0.5;
 }
 
 div.box form {
@@ -120,5 +126,15 @@ div.box form {
 body {
   padding-left: 15%;
   padding-right: 15%;
-/*  width: 100%;
-*/}
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/*  styles for add page */
+
+label {
+   font-family: 'Shadows Into Light', cursive;
+   
+ }
