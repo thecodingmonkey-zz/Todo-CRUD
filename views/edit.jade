@@ -25,7 +25,7 @@ body
                   br
                   textarea#description(name="description" rows=8 cols=50)= item.description
                   button Update
-                  button(action="/") Nevermind.
+                  a.fakebutton(href="/") Nevermind.
           else
             span.fixedfont.inline
               if item.finished == true

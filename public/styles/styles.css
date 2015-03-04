@@ -182,3 +182,15 @@ label {
    
  }
 
+.fakebutton {
+appearance:button;
+-moz-appearance:button; /* Firefox */
+-webkit-appearance:button; /* Safari and Chrome */
+/*  background-color: red;
+  border: 1px solid black;
+*/
+  font-family: 'Shadows Into Light', cursive;
+  text-decoration: none;
+  color: black;
+  padding: 3px;
+}
