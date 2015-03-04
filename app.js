@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var session = require('express-session');
 var methodOverride = require('method-override');
 var autoIncrement = require('mongoose-auto-increment');
 
@@ -10,6 +11,11 @@ app.set('view engine', 'jade');
 var connection = mongoose.connect('mongodb://devleague-user:puglife@ds049181.mongolab.com:49181/devleague-todo-crud');
 autoIncrement.initialize(connection);
 
+app.use(session({
+  secret: 'hedgehog Todo',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( methodOverride( function(req, res){
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -22,11 +28,25 @@ app.use( methodOverride( function(req, res){
 }));
 app.use(function(req, res, next) {
   console.log("Request from: " + req.ip);
+  console.log('session: ', req.session);
 
   next();
 
 });
 app.use(express.static(__dirname + '/public'));
+app.get('/login', todo_login);
+app.post('/login', todo_checklogin);
+app.use(function(req, res, next) {
+  console.log('Associated user: ', req.session.user);
+//  if (req.session.user)
+  if (req.session.username === undefined) {
+    res.redirect('/login');
+  }
+  else {
+    next();
+  }
+});
+
 app.get('/', todo_main);
 app.get('/edit/:item', todo_edit);
 app.get('/add', todo_newpage_add);
@@ -62,6 +82,24 @@ function todo_add (req, res) {
   });
 }
 
+function todo_login (req, res) {
+  res.render('login');
+}
+function todo_checklogin (req, res) {
+  console.log(req.body);
+
+  if (req.body.action === 'login') {
+
+  }
+  else if (req.body.action === 'create') {
+    req.session.username = req.body.username;
+//    res.session.username = req.body.username;
+    console.log(req.session.username);
+    res.redirect('/');
+  }
+
+//  res.send("OK");
+}
 function todo_update (req, res) {
   var id = req.params.item;
   var newTitle = req.body.item;

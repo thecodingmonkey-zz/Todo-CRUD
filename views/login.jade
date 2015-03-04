@@ -1,0 +1,31 @@
+doctype
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  title Log In to To-Do
+body
+  div.content
+    form(action="/login" method="POST")
+      fieldset
+        h3 Login
+        input(type="hidden" name="action" value="login")
+        label Username:
+        input(type="text" name="username")
+        br
+        label Password:
+        input(type="password" name="password")
+        button login
+
+  div.content
+    form(action="/login" method="POST")
+      fieldset
+        h3 Create Account
+        input(type="hidden" name="action" value="create")
+        label Username:
+        input(type="text" name="username")
+        br
+        label Password:
+        input(type="password" name="password")
+        button login
+
+  
