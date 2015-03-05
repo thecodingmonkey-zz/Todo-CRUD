@@ -2,7 +2,7 @@
   "name": "Todo-CRUD",
   "version": "1.0.0",
   "description": "A To-Do list using CRUD on an express server with Mongo storage.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
