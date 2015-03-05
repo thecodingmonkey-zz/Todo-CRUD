@@ -220,7 +220,7 @@ appearance:button;
 .tab label.tabtext {
   background: #eee; 
   padding: 10px;
-  padding-bottom: 20px; 
+  /*padding-bottom: 20px; */
   border: 1px solid #ccc; 
   margin-left: -1px; 
   position: relative;
