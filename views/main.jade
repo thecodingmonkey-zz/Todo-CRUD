@@ -44,7 +44,9 @@ body
           a.itemtext(href="/edit/" + item._id + "#current")= item.item
           p.description.inline= item.description
   footer
-    p #{unfinished} items unfinished, #{total} items total.
+    p 
+      span#unchecked_count #{unfinished} 
+      span &nbsp;items unfinished, #{total} items total.
 
   script(src="http://code.jquery.com/jquery-2.1.1.min.js")
   script(src="./js/app.js")

@@ -5,6 +5,10 @@ $(document).ready( function() {
   $("input.checkbox").click( function() {
     var $this = $(this);
     var num = $this[0].value;
+    var unchecked_count = parseInt( $("#unchecked_count").html() );
+
+//    alert(unchecked_count);
+
 
     if ($this.is(':checked')) {
       $.ajax(
@@ -12,6 +16,8 @@ $(document).ready( function() {
         {
           type: 'PUT'
         });
+
+      unchecked_count--;
     }
     else {
       $.ajax(
@@ -19,7 +25,10 @@ $(document).ready( function() {
         {
           type: 'PUT'
         });
+      unchecked_count++;
     }
+
+    $("#unchecked_count").html(unchecked_count.toString() );
   });
 
   $("#item").on("keyup", function() {
