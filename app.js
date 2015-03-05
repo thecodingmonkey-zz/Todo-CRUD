@@ -8,6 +8,7 @@ var bcrypt = require('bcrypt');
 
 var app = express();
 app.set('view engine', 'jade');
+//app.set('port', (process.env.PORT || 3000));
 
 var connection = mongoose.connect('mongodb://devleague-user:puglife@ds049181.mongolab.com:49181/devleague-todo-crud');
 autoIncrement.initialize(connection);
@@ -308,7 +309,7 @@ function todo_edit (req, res) {
 
 }
 
-var server = app.listen(3000, function () {
+var server = app.listen(process.env.PORT || 3000) , function () {
 
   var host = server.address().address;
   var port = server.address().port;
