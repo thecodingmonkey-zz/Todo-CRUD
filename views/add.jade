@@ -4,15 +4,17 @@ head
   meta(charset="UTF-8")
   title To-Do List
   link(rel="stylesheet", href="styles/styles.css")
+  link(rel="stylesheet", href="/styles/alt-bg.css")
 body
   h1 Add New Item
-  form(action='/new_item' method='POST')
-    fieldset
-      label(for="item") Task Name: 
-      input#item(autofocus type="text" name="item")
-      br
-      label(for="description") Description:
-      textarea#description(name="description" cols=50 rows=8)
-      br
-      button.add Add
-      a.fakebutton(href="/") Nevermind.
+  div.box
+    form(action='/new_item' method='POST')
+      fieldset
+        label(for="item") Task Name: 
+        input#item(autofocus type="text" name="item")
+        br
+        label(for="description") Description:
+        textarea#description(name="description" cols=50 rows=8)
+        br
+        button.add Add
+        a.fakebutton(href="/") Nevermind.
