@@ -1,5 +1,8 @@
-@import url('//fonts.googleapis.com/css?family=Indie+Flower');
+/*@import url('//fonts.googleapis.com/css?family=Indie+Flower');
 @import url('//fonts.googleapis.com/css?family=Shadows+Into+Light');
+*/
+@import url(http://fonts.googleapis.com/css?family=Crete+Round:400,400italic);
+@import url(http://fonts.googleapis.com/css?family=Kreon:300,400,700);
 
 body {
   /*background-color: red;*/
@@ -31,7 +34,8 @@ body {
   text-decoration: none;
   color: inherit;
   font-size: 32px;
-  font-family: 'Indie Flower', cursive;
+  /*font-family: 'Indie Flower', cursive;*/
+  font-family: 'Kreon', serif;
 }
 
 
@@ -42,7 +46,8 @@ item {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Shadows Into Light', cursive;
+  /*font-family: 'Shadows Into Light', cursive;*/
+  font-family: 'Kreon', serif;
 }
 
 h1 {
@@ -68,7 +73,8 @@ h4 {
 }
 
 .quickadd, .description, footer {
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Kreon', serif;
+  /*font-family: 'Shadows Into Light', cursive;*/
   letter-spacing: 1px;
 }
 
@@ -79,7 +85,8 @@ h4 {
 button {
   margin-top: 10px;
   font-size: 24px;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Kreon', serif;  
+  /*font-family: 'Shadows Into Light', cursive;*/
   opacity: 1.0;
 }
 
@@ -101,13 +108,15 @@ p.description {
 #item {
   width: 100%;
   font-size: 32px;
-  font-family: 'Shadows Into Light', cursive;
+  /*font-family: 'Shadows Into Light', cursive;*/
+  font-family: 'Kreon', serif;
   letter-spacing: 1px;
 }
 
 #description {
   font-size: 24px;
-  font-family: 'Shadows Into Light', cursive;
+  /*font-family: 'Shadows Into Light', cursive;*/
+  font-family: 'Kreon', serif;
   letter-spacing: 2px;
 }
 
@@ -186,7 +195,8 @@ item div {
 /*  styles for add page */
 
 label {
-   font-family: 'Shadows Into Light', cursive;
+   /*font-family: 'Shadows Into Light', cursive;*/
+   font-family: 'Kreon', serif;
  }
 
 .fakebutton {
@@ -196,7 +206,8 @@ appearance:button;
 /*  background-color: red;
   border: 1px solid black;
 */
-  font-family: 'Shadows Into Light', cursive;
+  /*font-family: 'Shadows Into Light', cursive;*/
+  font-family: 'Kreon', serif;
   text-decoration: none;
   color: black;
   padding: 3px;
@@ -251,7 +262,8 @@ appearance:button;
 
 .tab-content input {
   font-size: 18px;
-  font-family: 'Shadows Into Light', cursive;
+  /*font-family: 'Shadows Into Light', cursive;*/
+  font-family: 'Kreon', serif;
 }
 
 .tab-content label {
