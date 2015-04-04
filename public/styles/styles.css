@@ -1,9 +1,9 @@
 /*@import url('//fonts.googleapis.com/css?family=Indie+Flower');
 @import url('//fonts.googleapis.com/css?family=Shadows+Into+Light');
 */
-@import url('./reset.css')
-@import url(http://fonts.googleapis.com/css?family=Crete+Round:400,400italic);
-@import url(http://fonts.googleapis.com/css?family=Kreon:300,400,700);
+@import url('./reset.css');
+@import url(https://fonts.googleapis.com/css?family=Crete+Round:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Kreon:300,400,700);
 
 header {
     background-color: #D67964;
