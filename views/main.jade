@@ -11,23 +11,27 @@ body
     h3 
       span Logged in as 
         b #{user}.  
-      a(href="/login") (Not you?)
+      a(href="/login") Not you?
 
-    div.box
+  div.status
+    p
+      span#unchecked_count #{unfinished}
+      span &nbsp;item(s) unfinished, #{total} item(s) total.
 
-      form(action='/new_item' method='POST')
-        fieldset
-          h4.quickadd Add Item:
-          input#item(autofocus autocomplete="off" type="text" name="item" width="90%" placeholder="What needs to be done?")
-          br
-          textarea#description(name="description" cols=50 rows=8 placeholder="Description")
-          span
-            button.quickadd + Quick Add +
 
-      hr
+  div.box.add-box
 
-      form(action='/add' method='GET')
-        button.addnewscreen(action='/add') Add Item (new screen)
+    form(action='/new_item' method='POST')
+      fieldset
+        h4.quickadd Add Item:
+        input#item(autofocus autocomplete="off" type="text" name="item" width="90%" placeholder="What needs to be done?")
+        br
+        textarea#description(name="description" cols=50 rows=8 placeholder="Description")
+        span
+          button.quickadd Add
+
+    //- form(action='/add' method='GET')
+    //-   button.addnewscreen(action='/add') Add Item (new screen)
 
   data
     each item in items
@@ -45,8 +49,6 @@ body
           p.description.inline= item.description
   footer
     p 
-      span#unchecked_count #{unfinished} 
-      span &nbsp;items unfinished, #{total} items total.
 
   script(src="//code.jquery.com/jquery-2.1.1.min.js")
   script(src="./js/app.js")

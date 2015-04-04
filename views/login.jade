@@ -4,7 +4,7 @@ head
   meta(charset="UTF-8")
   title Log In to To-Do
   link(rel="stylesheet", href="/styles/styles.css")
-  link(rel="stylesheet", href="/styles/alt-bg.css")
+  //- link(rel="stylesheet", href="/styles/alt-bg.css")
 body
   header
     h1 Stuff To Do
@@ -22,16 +22,15 @@ body
             h4.login_error= error
             input(type="hidden" name="action" value="login")
             div.labels.inline-block
-              label Username:
+              label Username
               br
-              label Password:
-              br
-              button login
-            
-            div.formboxes.inline-block.valign-top
               input(type="text" name="username")
               br
+              label Password
+              br
               input(type="password" name="password")
+              br
+              button login
     div.tab
       input#tab-2(type="radio" name="tab-group-1")
       label.tabtext(for="tab-2") Create Account
@@ -41,17 +40,16 @@ body
         form(action="/login" method="POST")
           fieldset
             div.labels.inline-block
+              input(type="hidden" name="action" value="create")
               label Username:
+              br
+              input(type="text" name="username")
               br
               label Password:
               br
+              input(type="password" name="password")
+              br
               button create
 
-            //- h2 Create Account
-            div.formboxes.inline-block.valign-top
-              input(type="hidden" name="action" value="create")
-              input(type="text" name="username")
-              br
-              input(type="password" name="password")
-
-  
+  footer
+    p &nbsp;

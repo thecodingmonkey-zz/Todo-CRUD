@@ -4,10 +4,9 @@ head
   meta(charset="UTF-8")
   title EDIT To-Do List
   link(rel="stylesheet", href="/styles/styles.css")
-  link(rel="stylesheet", href="/styles/alt-bg.css")
 body
-  h1 EDIT
   header
+    h1 EDIT
   data
     each item in items
       item
@@ -16,7 +15,7 @@ body
             div.box#current
               span.fixedfont.inline
                 if item.finished == true
-                  img(src="/assets/checked.png" width=32 height=32)
+                  img(src="/assets/checked-teal.png" width=32 height=32)
                 else
                   img(src="/assets/unchecked.png" width=32 height=32)
               form.inline(action='/update/' + item._id method="POST")
@@ -25,7 +24,7 @@ body
                   input.inline#item(type="text" autocomplete="off" name="item" value=item.item) 
                   br
                   textarea#description(name="description" rows=8 cols=50)= item.description
-                  button Update
+                  button.edit Update
                   a.fakebutton(href="/") Nevermind.
           else
             span.fixedfont.inline
